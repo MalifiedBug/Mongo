@@ -44,6 +44,21 @@ response.json({
 // return result;  
 })
 
+app.get("/getpost", async (request, response)=>{
+    console.log(request.body)
+    const client = await createConnection();
+    const result = await client
+    .db("webcode")
+    .collection("rent")
+    .find({})
+    .toArray()
+    console.log(result)
+    response.json({
+        data:result
+    })
+    // return result;  
+    })
+
 
 
 
