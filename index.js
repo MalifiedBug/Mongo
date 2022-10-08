@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 
 import { MongoClient } from "mongodb";
 
@@ -27,10 +28,10 @@ const MONGO_URL = process.env.MONGO_URL;
     const client = new MongoClient(MONGO_URL);
     await client.connect();
     return client;
-}
+   }
 
 
-app.post("/addpost", async (request, response)=>{
+app.post("/addpost",cors(), async (request, response)=>{
 console.log(request.body)
 const client = await createConnection();
 const result = await client
@@ -44,7 +45,7 @@ response.json({
 // return result;  
 })
 
-app.get("/getpost", async (request, response)=>{
+app.get("/getpost",cors(), async (request, response)=>{
     console.log(request.body)
     const client = await createConnection();
     const result = await client
