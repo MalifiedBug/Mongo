@@ -46,7 +46,7 @@ response.json({
 })
 
 
-app.post("/addpost",cors(), async (request, response)=>{
+app.post("/getpost",cors(), async (request, response)=>{
     console.log(request.body)
     const client = await createConnection();
     const result = await client
