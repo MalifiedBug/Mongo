@@ -1,6 +1,6 @@
 import express from "express";
 import cors from 'cors';
-
+import { ObjectId } from 'mongodb';
 import { MongoClient } from "mongodb";
 
 
@@ -29,6 +29,8 @@ const MONGO_URL = process.env.MONGO_URL;
     await client.connect();
     return client;
    }
+
+   const client = await createConnection();
 
 
 app.post("/addpost",cors(), async (request, response)=>{
@@ -68,6 +70,26 @@ app.get("/getpost",cors(), async (request, response)=>{
     .collection("rent")
     .find({})
     .toArray()
+    console.log(result)
+    response.json({
+        data:result
+    })
+    // return result;  
+    })
+
+
+    
+app.get("/getpost/:id",cors(), async (request, response)=>{
+
+    const {id} = request.params;
+     
+
+    const client = await createConnection();
+    const result = await client
+    .db("webcode")
+    .collection("rent")
+    .findOne({_id: ObjectId(id)})
+   
     console.log(result)
     response.json({
         data:result
