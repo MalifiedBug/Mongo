@@ -69,7 +69,7 @@ app.get("/getpost",cors(), async (request, response)=>{
     .db("webcode")
     .collection("rent")
     .find({})
-    .sort()
+    .sort({"id":1})
     .toArray()
     console.log(result)
     response.json({
@@ -94,12 +94,27 @@ app.get("/getpost",cors(), async (request, response)=>{
     //     // return result;  
     //     })
 
+    app.get("/getpost",cors(), async (request, response)=>{
+        console.log(request.body)
+        const client = await createConnection();
+        const result = await client
+        .db("webcode")
+        .collection("rent")
+        .updateOne({id:"1"},{$set:{img:"changed once again"}} )
+
+        .toArray()
+        console.log(result)
+        response.json({
+            data:result
+        })
+        // return result;  
+        })
+
 
     
 app.get("/getpost/:id",cors(), async (request, response)=>{
 
-    const {id} = request.params;
-     
+    const {id} = request.params;    
 
     const client = await createConnection();
     const result = await client
@@ -113,6 +128,7 @@ app.get("/getpost/:id",cors(), async (request, response)=>{
     })
     // return result;  
     })
+
 
 
 
