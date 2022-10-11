@@ -69,7 +69,7 @@ app.get("/getpost",cors(), async (request, response)=>{
     .db("webcode")
     .collection("rent")
     .find({})
-    .sort({})
+    .sort()
     .toArray()
     console.log(result)
     response.json({
@@ -78,21 +78,21 @@ app.get("/getpost",cors(), async (request, response)=>{
     // return result;  
     })
 
-    app.get("/getpost",cors(), async (request, response)=>{
-        console.log(request.body)
-        const client = await createConnection();
-        const result = await client
-        .db("webcode")
-        .collection("rent")
-        .find({})
-        .sort({id:1})
+    // app.get("/getpost",cors(), async (request, response)=>{
+    //     console.log(request.body)
+    //     const client = await createConnection();
+    //     const result = await client
+    //     .db("webcode")
+    //     .collection("rent")
+    //     .find({})
+    //     .sort({id:1})
         
-        console.log(result)
-        response.json({
-            data:result
-        })
-        // return result;  
-        })
+    //     console.log(result)
+    //     response.json({
+    //         data:result
+    //     })
+    //     // return result;  
+    //     })
 
 
     
